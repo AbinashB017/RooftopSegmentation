@@ -1,0 +1,12 @@
+# Temp files
+*.pyc
+__pycache__/
+*.log
+.ipynb_checkpoints/
+
+# Assignment PDF (private)
+Resilience_AIML_Intern_Project_Assignments_Aug26.pdf
+
+# Colab temp
+*.zip
+*.doc

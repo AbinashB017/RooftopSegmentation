@@ -33,7 +33,7 @@ pip install segment-geospatial leafmap mercantile geopandas rasterio shapely mat
 
 1. **Open Google Colab:** Upload `RooftopSegmentationFinal.ipynb`.
 2. **Enable GPU:** Go to `Runtime` > `Change runtime type` and select `T4 GPU`.
-3. **Upload Data (Optional):** The notebook expects `dataset1.geojson` (Mumbai), `dataset2.geojson` (Pune), and `dataset3.geojson` (Vizag) in the working directory. 
+3. **Upload Data:** Upload the GeoJSON files from the `dataset/` folder — `dataset1.geojson` (Mumbai), `dataset2.geojson` (Pune), and `dataset3.geojson` (Vizag).
 4. **Run All:** The notebook is modularly designed and memory-optimized. Run all cells sequentially. 
 5. **Memory Note:** The pipeline uses `gc.collect()` and `torch.cuda.empty_cache()` between AOIs to ensure the Colab Free Tier does not crash during batch segmentation.
 
@@ -49,7 +49,46 @@ After filtering and vegetation removal, the model's pixel-level segmentation per
 | **Pune** | 1,572 | 2,282 | 0.2823 | 0.4403 |
 | **Vizag** | 486 | 630 | 0.3269 | 0.4928 |
 
-*Note: Visual comparisons and GeoJSON outputs are automatically generated in the `/output` folder when the notebook finishes.*
+---
+
+## 🖼️ Output Visualizations
+
+### SAM Filtered Rooftops (All 3 AOIs)
+![SAM Filtered Rooftops across Mumbai, Pune, and Vizag](Output_Visualizations/all_aois_sam_results.png)
+
+### SAM Predictions vs Microsoft Building Footprints (Side-by-Side)
+![Side-by-side comparison of SAM predictions and Microsoft Building Footprints](Output_Visualizations/sam_vs_ms_side_by_side.png)
+
+### Overlay Comparison with IoU & F1 Scores
+![Overlay of SAM (lime) and MS Footprints (cyan) with metrics](Output_Visualizations/overlay_comparison.png)
+
+### Per-City Comparison Overlays
+
+| Mumbai | Pune | Vizag |
+|---|---|---|
+| ![Mumbai](Output_Visualizations/mumbai_comparison.png) | ![Pune](Output_Visualizations/pune_comparison.png) | ![Vizag](Output_Visualizations/vizag_comparison.png) |
+
+---
+
+## 📂 Repository Structure
+
+```
+├── RooftopSegmentationFinal.ipynb   # Main notebook (SAM pipeline + evaluation)
+├── Roof (1).ipynb                   # Experimental notebook (point-prompted SAM)
+├── README.md                        # This file
+├── SUMMARY.md                       # Detailed project summary
+├── dataset/                         # AOI boundary files
+│   ├── dataset1.geojson             # Mumbai
+│   ├── dataset2.geojson             # Pune
+│   └── dataset3.geojson             # Vizag
+└── Output_Visualizations/           # Result images
+    ├── all_aois_sam_results.png
+    ├── overlay_comparison.png
+    ├── sam_vs_ms_side_by_side.png
+    ├── mumbai_comparison.png
+    ├── pune_comparison.png
+    └── vizag_comparison.png
+```
 
 ---
 
